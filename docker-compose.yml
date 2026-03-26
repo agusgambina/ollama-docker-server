@@ -3,12 +3,28 @@ services:
     image: ollama/ollama:latest
     container_name: ollama
     ports:
-      - "${OLLAMA_PORT}:11434"
+      - "${OLLAMA_PORT:-11434}:11434"
+    environment:
+      - OLLAMA_HOST=0.0.0.0
     volumes:
       - ./local_data:/root/.ollama
     restart: unless-stopped
     networks:
       - ollama_network
+
+  litellm:
+    image: ghcr.io/berriai/litellm:main-latest
+    container_name: litellm
+    ports:
+      - "${LITELLM_PORT:-4000}:4000"
+    volumes:
+      - ./litellm_config.yaml:/app/config.yaml
+    command: --config /app/config.yaml --port 4000
+    restart: unless-stopped
+    networks:
+      - ollama_network
+    depends_on:
+      - ollama
 
   open-webui:
     image: ghcr.io/open-webui/open-webui:main

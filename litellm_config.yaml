@@ -1,0 +1,38 @@
+model_list:
+  # Ollama models accessible by their native names
+  - model_name: mistral
+    litellm_params:
+      model: ollama/mistral
+      api_base: http://ollama:11434
+
+  - model_name: codellama
+    litellm_params:
+      model: ollama/codellama:13b
+      api_base: http://ollama:11434
+
+  - model_name: codeqwen
+    litellm_params:
+      model: ollama/codeqwen
+      api_base: http://ollama:11434
+
+  # Claude-compatible aliases for use with the Claude Code VS Code extension.
+  # These map Claude model names to local Ollama models so that tools that
+  # send requests to the Anthropic API format (via ANTHROPIC_BASE_URL) are
+  # transparently routed to local models.
+  - model_name: claude-3-5-sonnet-20241022
+    litellm_params:
+      model: ollama/mistral
+      api_base: http://ollama:11434
+
+  - model_name: claude-3-5-haiku-20241022
+    litellm_params:
+      model: ollama/mistral
+      api_base: http://ollama:11434
+
+  - model_name: claude-3-opus-20240229
+    litellm_params:
+      model: ollama/codellama:13b
+      api_base: http://ollama:11434
+
+litellm_settings:
+  drop_params: true
