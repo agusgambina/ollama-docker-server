@@ -80,14 +80,16 @@ All three services should show `running`.
 Pull models into the running Ollama container. They are stored in `./local_data/models` and persist across restarts.
 
 ```bash
-# General-purpose
-docker exec ollama ollama pull mistral
-docker exec ollama ollama pull llama3.2
+# Coding LLMs
 
-# Code-focused
-docker exec ollama ollama pull codellama:13b
-docker exec ollama ollama pull codeqwen
-docker exec ollama ollama pull deepseek-coder
+docker exec ollama ollama pull phi4:latest
+docker exec ollama ollama pull llama3.1:8b
+docker exec ollama ollama pull gpt-oss:20b
+
+# General Use LLMs
+
+docker exec ollama ollama pull gemma4
+docker exec ollama ollama pull qwen3.5:9b
 
 # List downloaded models
 docker exec ollama ollama list
